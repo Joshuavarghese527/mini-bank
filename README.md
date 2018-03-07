@@ -12,8 +12,9 @@ Display the data in any way you choose, the goal is to show the history of trans
 
 ## Server (ExpressJS Side)
 
-- Plaid API 
-- MongooseDB ? 
+x Refactor Code with folders
+x Plaid API setup
+- MongoDB ? 
 
 ## Client (React Side):
 
@@ -25,4 +26,5 @@ Display the data in any way you choose, the goal is to show the history of trans
 
 ## Having Backend Server and Frontend Server run on one command:
 
+x Proxy | React native create to have all run on one command
 x Npm run dev
