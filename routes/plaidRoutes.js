@@ -6,14 +6,6 @@ const client = require('../services/plaid');
 
 module.exports = (app) => {
 
-  app.get('/auth', function(request, response, next) {
-    response.render('index.ejs', {
-      PLAID_PUBLIC_KEY: keys.PLAID_PUBLIC_KEY,
-      PLAID_ENV: keys.PLAID_ENV,
-    });
-  });
-
-
   app.post('/get_access_token', function(request, response, next) {
     PUBLIC_TOKEN = request.body.public_token;
     client.exchangePublicToken(PUBLIC_TOKEN, function(error, tokenResponse) {
