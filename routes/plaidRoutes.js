@@ -6,7 +6,14 @@ const client = require('../services/plaid');
 
 module.exports = (app) => {
 
-  app.post('/get_access_token', function(request, response, next) {
+  app.get('/api/keys', function(request, response) {
+  response.json({ 
+    PLAID_PUBLIC_KEY: keys.PLAID_PUBLIC_KEY,
+    PLAID_ENV: keys.PLAID_ENV,
+  });
+});
+
+  app.post('/api/get_access_token', function(request, response, next) {
     PUBLIC_TOKEN = request.body.public_token;
     client.exchangePublicToken(PUBLIC_TOKEN, function(error, tokenResponse) {
       if (error != null) {
@@ -26,7 +33,7 @@ module.exports = (app) => {
     });
   });
 
-  app.get('/accounts', function(request, response, next) {
+  app.get('/api/accounts', function(request, response, next) {
     // Retrieve high-level account information and account and routing numbers
     // for each account associated with the Item.
     client.getAuth(ACCESS_TOKEN, function(error, authResponse) {
@@ -47,7 +54,7 @@ module.exports = (app) => {
     });
   });
 
-  app.post('/item', function(request, response, next) {
+  app.post('/api/item', function(request, response, next) {
     // Pull the Item - this includes information about available products,
     // billed products, webhook information, and more.
     client.getItem(ACCESS_TOKEN, function(error, itemResponse) {
@@ -76,7 +83,7 @@ module.exports = (app) => {
     });
   });
 
-  app.post('/transactions', function(request, response, next) {
+  app.post('/api/transactions', function(request, response, next) {
     // Pull transactions for the Item for the last 30 days
     var startDate = moment().subtract(30, 'days').format('YYYY-MM-DD');
     var endDate = moment().format('YYYY-MM-DD');
